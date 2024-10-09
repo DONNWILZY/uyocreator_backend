@@ -1,0 +1,32 @@
+{
+  "name": "uyo_creators_club",
+  "version": "1.0.0",
+  "description": "UYO CREATORS CLUB SYSTEM",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DONNWILZY/uyocreator_backend.git"
+  },
+  "keywords": [
+    "club",
+    "event",
+    "blog",
+    "insight",
+    "membership"
+  ],
+  "author": "GODSWILL GODSWILL",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/DONNWILZY/uyocreator_backend/issues"
+  },
+  "homepage": "https://github.com/DONNWILZY/uyocreator_backend#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "express": "^4.21.1",
+    "mongoose": "^8.7.1",
+    "nodemon": "^3.1.7"
+  }
+}
