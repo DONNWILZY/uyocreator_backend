@@ -1,7 +1,7 @@
 //test.js
 
-const { sendEmail } = require('./mailHelpers/emailHelper');
-const { createTransporter, verifyTransporter } = require('./mailHelpers/emailService');
+const { sendEmail } = require('../mailHelpers/emailHelper');
+const { createTransporter, verifyTransporter } = require('../mailHelpers/emailService');
 
 
 const emailData = {

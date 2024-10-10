@@ -1,3 +1,5 @@
+const crypto = require('crypto');
+
 /**
  * Auto-generated code utility functions.
  * 
@@ -12,19 +14,29 @@
  * @returns {string} Random code.
  */
 function generateCode(length = 8, type = 'mixed') {
+  if (typeof length !== 'number' || length <= 0) {
+    throw new Error('Length must be a positive integer.');
+  }
+
   const characterSets = {
     mixed: 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789',
     numbers: '0123456789',
     alpha: 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'
   };
 
-if (!characterSets[type]) {  //Specific  the error!
+  if (!characterSets[type]) {
     throw new Error(`Invalid type. Use 'mixed', 'numbers', or 'alpha'.`);
   }
 
   const characters = characterSets[type];
-  
-  return Array(length).fill(0).map(() => characters.charAt(Math.floor(Math.random() * characters.length))).join('');
+  const code = [];
+
+  for (let i = 0; i < length; i++) {
+    const randomByte = crypto.randomBytes(1)[0];
+    code.push(characters.charAt(randomByte % characters.length));
+  }
+
+  return code.join('');
 }
 
 const generateCodeUtil = {
