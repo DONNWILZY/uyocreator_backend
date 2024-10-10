@@ -1,26 +1,26 @@
 const nodemailer = require('nodemailer');
+require('dotenv').config();
 
-exports.sendOtpEmail = (email, otpCode) => {
-    const transporter = nodemailer.createTransport({
-        service: 'gmail',
-        auth: {
-            user: process.env.EMAIL_USER,
-            pass: process.env.EMAIL_PASS
-        }
-    });
-
-    const mailOptions = {
-        from: process.env.EMAIL_USER,
-        to: email,
-        subject: 'Your OTP Code',
-        text: `Your OTP code is ${otpCode}.`
-    };
-
-    transporter.sendMail(mailOptions, (error, info) => {
-        if (error) {
-            console.log(error);
-        } else {
-            console.log('Email sent: ' + info.response);
-        }
-    });
+const createTransporter = () => {
+  return nodemailer.createTransport({
+    service: 'gmail',
+    secure: true,
+    port: 465,
+    auth: {
+      user: process.env.AUTH_EMAIL,
+      pass: process.env.AUTH_PASS
+    }
+  });
 };
+
+const verifyTransporter = (transporter) => {
+  transporter.verify((error, success) => {
+    if (error) {
+      console.log('Error with transporter: ', error);
+    } else {
+      console.log('NODE MAILER IS ACTIVE');
+    }
+  });
+};
+
+module.exports = { createTransporter, verifyTransporter };
