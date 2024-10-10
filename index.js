@@ -1,3 +1,5 @@
+//config\routesConfig.js
+
 const express = require('express');
 const app = express();
 const nodemailer = require('nodemailer');
@@ -24,7 +26,7 @@ initializeRoutes(app);
 const { port, currentUrl } = require('./config/portConfig');
 
 // deault route for testing
-app.get('/',   (req, res) =>{
+app.get('/home',   (req, res) =>{
   res.send( `DEFAULT ROUTE IS WORKING`);
   
 });
