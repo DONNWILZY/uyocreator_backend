@@ -2,6 +2,8 @@ const User = require('../models/User');
 const OtpCode = require('../models/OtpCode');
 const generateCode = require('../utilities/autoGenCode');
 const { sendEmail } = require('../mailHelpers/emailHelper');
+const DescriptionService = require('./description.service.js');
+const descriptionService = new DescriptionService();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const AppError = require('../utilities/appError');
@@ -10,23 +12,43 @@ const saltRounds = 10;
 
 const authService = {
   // Create User with OTP for verification
-  async createUser(name, email, password) {
-    const hashedPassword = await bcrypt.hash(password, saltRounds);
-    const appId = generateCode.generateDigits(10);
-    const otpCode = generateCode.generateDigits(6);
-    const expiresAt = new Date(Date.now() + 15 * 60 * 1000); // 15 mins expiry
-
-    const user = await User.create({ name, email, gender, password: hashedPassword, appId });
-    await OtpCode.create({ userId: user._id, code: otpCode, type: 'email-verification', expiresAt });
-
-    // Send OTP via email
-    await sendEmail(email, 'Verify Your Email', 'otpTemplate', {
-      name,
-      otp: otpCode,
-      link: `${process.env.CLIENT_URL}/verify-email/${otpCode}`,
-    });
-
-    return { ...user.toJSON(), password: undefined }; // Omit password from return
+// Create User with OTP for verification
+async createUser(name, email, gender, password) {
+    try {
+      const hashedPassword = await bcrypt.hash(password, saltRounds);
+      const appId = generateCode.generateDigits(10);
+      const otpCode = generateCode.generateDigits(6);
+      const expiresAt = new Date(Date.now() + 15 * 60 * 1000); // 15 mins expiry
+      const description = descriptionService.generateDescription(gender);
+      const avatar = descriptionService.generateAvatar(gender);
+  
+      const user = await User.create({ 
+        name, 
+        email, 
+        gender, 
+        password: hashedPassword, 
+        appId, 
+        description, 
+        avatar 
+      });
+      await OtpCode.create({ 
+        userId: user._id, 
+        code: otpCode, 
+        type: 'email-verification', 
+        expiresAt 
+      });
+  
+      // Send OTP via email
+      await sendEmail(email, 'Verify Your Email', 'otpTemplate', {
+        name,
+        otp: otpCode,
+        link: `${process.env.CLIENT_URL}/verify-email/${otpCode}`,
+      });
+  
+      return { ...user.toJSON(), password: undefined }; // Omit password from return
+    } catch (error) {
+      throw new AppError(error.message, 500, 'CREATE_USER_ERROR', error);
+    }
   },
 
   // Login User

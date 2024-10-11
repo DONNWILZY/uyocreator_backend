@@ -5,7 +5,7 @@ const authControllers = {
   // Register Controller
   async signupWithEmail(req, res, next) {
     const { name, email, gender, password } = req.body;
-
+  
     try {
       const user = await authService.createUser(name, email, gender, password);
       res.status(201).json({
