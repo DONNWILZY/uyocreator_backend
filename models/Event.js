@@ -8,8 +8,15 @@ const eventSchema = new Schema({
     endDate: { type: Date }, // Optional for multi-day events
     isFree: { type: Boolean, default: true },
     price: { type: Number }, // For paid events
-    attendees: [{ type: Schema.Types.ObjectId, ref: 'User' }],
-    waitlist: [{ type: Schema.Types.ObjectId, ref: 'User' }],
+    attendees: [
+        {
+            userId: { type: Schema.Types.ObjectId, ref: 'User', required: true },
+            status: { type: String, enum: ['booked', 'waitlisted'], default: 'booked' },
+            ticketNumber: { type: String, required: true },
+            seatNumber: { type: Number, required: true },
+        }
+    ],
+    reservedSeats: [{ type: Number }], // Reserved seat numbers to skip
     agenda: [
         {
             day: Number,
@@ -41,15 +48,14 @@ const eventSchema = new Schema({
             department: String,
         }
     ],
+    maxAttendees: { type: Number }, // Maximum number of attendees
     status: { type: String, enum: ['upcoming', 'ongoing', 'ended'], default: 'upcoming' },
-    // Payment details if event is paid
     payments: [{ 
         userId: { type: Schema.Types.ObjectId, ref: 'User' },
         amountPaid: Number,
         paymentMethod: { type: String, enum: ['Paystack', 'Offline'] },
         paymentStatus: { type: String, enum: ['pending', 'confirmed', 'rejected'], default: 'pending' }
     }],
-    // Post-event details
     feedback: [
         {
             userId: { type: Schema.Types.ObjectId, ref: 'User' },

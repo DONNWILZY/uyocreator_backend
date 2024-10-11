@@ -1,12 +1,9 @@
-//test.js
-
 const { sendEmail } = require('../mailHelpers/emailHelper');
-const { createTransporter, verifyTransporter } = require('../mailHelpers/emailService');
 
-
+// Example email data
 const emailData = {
   email: 'e.godswill@sotrip.app',
-  subject: 'Test Email',
+  subject: 'Test Email with Attachments',
   templateName: 'otpTemplate',
   variables: {
     name: 'John Doe',
@@ -15,4 +12,17 @@ const emailData = {
   }
 };
 
-sendEmail(emailData.email, emailData.subject, emailData.templateName, emailData.variables);
+// Example attachments array
+const attachments = [
+  {
+    filename: 'example.pdf',
+    path: ''  // Absolute or relative path to the file
+  },
+  {
+    filename: 'image.jpg',
+    path: './path/to/image.jpg'
+  }
+];
+
+// Sending email with attachments
+sendEmail(emailData.email, emailData.subject, emailData.templateName, emailData.variables, attachments);

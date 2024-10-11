@@ -4,7 +4,7 @@ const express = require('express');
 
 // Route imports
 const userRoutes = require('../routes/userRoutes');
-// const eventRoutes = require('../routes/eventRoutes');
+const eventRoutes = require('../routes/eventRoutes');
 // const blogRoutes = require('../routes/blogRoutes');
 // const shopRoutes = require('../routes/shopRoutes');
 
@@ -16,7 +16,7 @@ const routeConfig = (app) => {
 
     // Routes
     app.use('/api/users', userRoutes);
-    // app.use('/api/events', eventRoutes);
+    app.use('/api/events', eventRoutes);
     // app.use('/api/blogs', blogRoutes);
     // app.use('/api/shop', shopRoutes);
 

@@ -21,7 +21,7 @@ class DescriptionService {
   }
 
   generateAvatar(gender) {
-    return gender === 'male' ? 'male-avatar.jpg' : 'female-avatar.jpg';
+    return gender === 'male' ? 'https://res.cloudinary.com/dwbthqy0f/image/upload/v1728647979/female_ab2wvq.jpg' : 'https://res.cloudinary.com/dwbthqy0f/image/upload/v1728647979/male_jxqv1g.jpg';
   }
 }
 

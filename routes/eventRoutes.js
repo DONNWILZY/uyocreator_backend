@@ -1,0 +1,32 @@
+const express = require('express');
+const eventController = require('../controllers/eventController');
+const router = express.Router();
+
+// Create event
+router.post('/create', eventController.createEvent);
+
+// Add/Update activities
+router.put('/activities', eventController.addOrUpdateActivities);
+
+// Add/Update sponsors
+router.put('/sponsors', eventController.addOrUpdateSponsors);
+
+// Add/Update volunteers
+router.put('/volunteers', eventController.addOrUpdateVolunteers);
+
+// Book attendee
+router.post('/book', eventController.bookAttendee);
+
+// Get all events
+router.get('/', eventController.getAllEvents);
+
+// Get event by ID
+router.get('/:eventId', eventController.getEventById);
+
+// Get events for a specific user
+router.get('/user/:userId', eventController.getEventsByUser);
+
+// Get single event for a specific user
+router.get('/:eventId/user/:userId', eventController.getSingleEventByUser);
+
+module.exports = router;
