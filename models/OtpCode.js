@@ -12,10 +12,7 @@ const OtpCodeSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  type: {
-    type: String,
-    // required: true,
-  },
+  type: { type: String, enum: ['email-verification', 'password-reset'], required: true },
   createdAt: {
     type: Date,
     required: true,
