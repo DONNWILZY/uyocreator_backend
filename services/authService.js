@@ -80,7 +80,7 @@ const authService = {
     await OtpCode.create({ userId, code: otpCode, type: 'email-verification', expiresAt });
 
     // Resend OTP via email
-    await sendEmail(email, 'Resend OTP', 'otpTemplate', {
+    await sendEmail(email, 'Resend OTP', 'resent_otp', {
       name: user.name,
       otp: otpCode,
       link: `${process.env.CLIENT_URL}/verify-email/${otpCode}`,
