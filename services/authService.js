@@ -16,7 +16,7 @@ const authService = {
     const otpCode = generateCode.generateDigits(6);
     const expiresAt = new Date(Date.now() + 15 * 60 * 1000); // 15 mins expiry
 
-    const user = await User.create({ name, email, password: hashedPassword, appId });
+    const user = await User.create({ name, email, gender, password: hashedPassword, appId });
     await OtpCode.create({ userId: user._id, code: otpCode, type: 'email-verification', expiresAt });
 
     // Send OTP via email
@@ -100,7 +100,7 @@ const authService = {
     await OtpCode.create({ userId: user._id, code: otpCode, type: 'password-reset', expiresAt });
 
     // Send OTP via email
-    await sendEmail(email, 'Reset Your Password', 'otpTemplate', {
+    await sendEmail(email, 'Reset Your Password', 'request_password_reset', {
       name: user.name,
       otp: otpCode,
       link: `${process.env.CLIENT_URL}/reset-password/${otpCode}`,

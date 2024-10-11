@@ -4,10 +4,10 @@ const AppError = require('../utilities/appError');
 const authControllers = {
   // Register Controller
   async signupWithEmail(req, res, next) {
-    const { name, email, password } = req.body;
+    const { name, email, gender, password } = req.body;
 
     try {
-      const user = await authService.createUser(name, email, password);
+      const user = await authService.createUser(name, email, gender, password);
       res.status(201).json({
         status: 'success',
         message: 'Signup successful, please verify your email',

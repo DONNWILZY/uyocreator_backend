@@ -6,8 +6,10 @@ const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
     appId: { type: Number, required: true },
+    avatar: { type: String, required: true },
     name: { type: String, required: true },
     email: { type: String, required: true, unique: true },
+    description: { type: String},
     password: { type: String, required: true },
     phoneNumber: { type: String,  },
     isVerifiedEmail: { type: Boolean, default: false },
