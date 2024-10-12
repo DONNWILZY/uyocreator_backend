@@ -15,13 +15,13 @@ const emailData = {
 // Example attachments array
 const attachments = [
   {
-    filename: 'example.pdf',
-    path: ''  // Absolute or relative path to the file
+    filename: 'ticket.html',
+    path: './resources/ticket.html'  // Absolute or relative path to the file
   },
-  {
-    filename: 'image.jpg',
-    path: './path/to/image.jpg'
-  }
+  // {
+  //   filename: 'image.jpg',
+  //   path: './path/to/image.jpg'
+  // }
 ];
 
 // Sending email with attachments

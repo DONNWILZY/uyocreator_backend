@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{{eventTitle}} | UYO CREATORS CLUB</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap");
+    @import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap");
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body, html {
+      height: 30vh;
+      display: grid;
+      font-family: "Poppins", sans-serif;
+      background: #3a0958;
+      color: black;
+      font-size: 14px;
+      letter-spacing: 0.1em;
+    }
+
+    .ticket {
+  margin: 20px auto; /* Added margin */
+  display: flex;
+  background: #fff; 
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+  padding: 10px; /* Added padding */
+}
+
+    .left {
+      position: relative;
+      display: flex;
+    }
+
+    .image {
+      height: 250px;
+      width: 250px;
+      background-image: url("https://res.cloudinary.com/dwbthqy0f/image/upload/v1728613908/creatorsweekone_l1ebar.jpg");
+      background-size: cover;
+      opacity: 0.85;
+      border-radius: 10px;
+      position: relative;
+    }
+
+    /* Admit One (left side) */
+    .admit-one {
+      position: absolute;
+      color: darkgray;
+      height: 250px;
+      padding: 0 10px;
+      letter-spacing: 0.15em;
+      display: flex;
+      text-align: center;
+      justify-content: space-around;
+      writing-mode: vertical-rl;
+      transform: rotate(-180deg);
+    }
+
+    .admit-one span:nth-child(2) {
+      color: darkgray;
+      font-weight: 700;
+    }
+
+    /* Ticket number on the left side (inside the image) */
+    .left .ticket-number {
+      height: 250px;
+      width: 250px;
+      display: flex;
+      justify-content: flex-end;
+      align-items: flex-end;
+      padding: 5px;
+    }
+
+    .ticket-number p {
+      color: #404040;
+      font-size: 18px;
+      font-weight: 700;
+      opacity: 0.8;
+    }
+
+    /* Watermark (transparent) */
+    .watermark-left {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-image: url("https://res.cloudinary.com/dwbthqy0f/image/upload/v1728561126/image-removebg-preview_4_rqkhhb.png");
+      background-size: contain;
+      background-repeat: no-repeat;
+      opacity: 0.1; /* Adjust transparency */
+      height: 200px; /* Adjust size */
+      width: 200px; /* Adjust size */
+      z-index: 0;
+    }
+
+    .watermark {
+  position: absolute;
+  top: 50%;
+  left: 265%; /* Shifted it towards the right */
+  transform: translate(-50%, -50%);
+  background-image: url("https://res.cloudinary.com/dwbthqy0f/image/upload/v1728561126/image-removebg-preview_4_rqkhhb.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  opacity: 0.1; /* Adjust transparency */
+  height: 220px; /* Adjust size */
+  width: 220px; /* Adjust size */
+  z-index: 0;
+}
+
+
+    .ticket-info {
+      padding: 10px 30px;
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    /* Date in digital font */
+    .date {
+      border-top: 1px solid gray;
+      border-bottom: 1px solid gray;
+      padding: 5px 0;
+      font-weight: 700;
+      font-family: "Orbitron", sans-serif; /* Digital font */
+      color: #EF5E25; /* Orange */
+    }
+
+    .show-name {
+      font-size: 32px;
+      color: #3a0958; /* Dark Purple */
+    }
+
+    .show-name h1 {
+      font-size: 40px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      color: #3a0958; /* Dark Purple */
+    }
+
+    .time {
+      padding: 10px 0;
+      color: #3a0958; /* Dark Purple */
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      font-weight: 700;
+    }
+
+    .time span {
+      font-weight: 400;
+      color: gray;
+    }
+
+    .location {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      width: 100%;
+      padding-top: 8px;
+      border-top: 1px solid gray;
+    }
+
+    .location .separator {
+      font-size: 20px;
+    }
+
+    .right {
+      width: 180px;
+      border-left: 1px dashed #404040;
+      position: relative;
+    }
+
+    /* Align right side content closer to edge */
+    .right-info-container {
+      height: 250px;
+      padding: 10px 10px 10px 0; /* Removed padding from right */
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      align-items: flex-end; /* Changed to flex-end */
+    }
+
+    .right .show-name h1 {
+      font-size: 18px;
+      text-align: right; /* Added text-align: right */
+    }
+
+    .barcode {
+      height: 100px;
+    }
+
+    .barcode img {
+      height: 100%;
+    }
+
+    .right .admit-one span {
+      display: flex;
+      font-size: 8px;
+    }
+
+    
+    .left .admit-one span {
+      display: block;
+      font-size: 8px;
+    }
+
+    /* Ticket number on the right side */
+    .right .ticket-number {
+      position: absolute;
+      bottom: 10px;
+      right: 10px; /* Adjusted right padding */
+      color: gray;
+      font-weight: 700;
+      text-align: right; /* Added text-align: right */
+    }
+
+  </style>
+</head>
+<body>
+
+<div class="ticket">
+  <div class="left">
+    <div class="image">
+      <!-- Watermark -->
+      <div class="watermark"></div>
+
+      <!-- Admit One (left) -->
+      <p class="admit-one">
+        <span>ADMIT ONE</span>
+        <span>ADMIT ONE</span>
+        <span>ADMIT ONE</span>
+      </p>
+      
+      <!-- Ticket number on image -->
+      <div class="ticket-number">
+        <p>{{ticketNumber}}</p>
+      </div>
+    </div>
+    <div class="ticket-info">
+      <p class="date">
+        <span>Date: Coming Soon</span>
+        <!-- <span>TUESDAY</span>
+        <span class="event-date">NOVEMBER 29TH</span>
+        <span>2024</span> -->
+      </p>
+      <div class="show-name">
+        <h1>{{attendeeName}}</h1>
+      </div>
+      <div class="time">
+        <p> Time: <span>N/A</span></p>
+        <!-- <p>8:00 PM <span>TO</span> 11:00 PM</p>
+        <p>DOORS <span>@</span> 7:00 PM</p> -->
+      </div>
+      <p class="location">
+        <span><i class="fas fa-map-marker-alt">Uyo, Nigeria</i></span>
+        <!-- <span>Uyo, Nigeria</span> -->
+        <!-- <span class="separator"><i class="far fa-smile"></i></span> -->
+        <!-- <span>Emmjeem Hotels</span>
+        <span class="separator"><i class="far fa-smile"></i></span>
+        <span>Uyo, Akwa Ibom</span> -->
+      </p>
+    </div>
+  </div>
+  <div class="right">
+    <p class="admit-one">
+        <span>ADMIT ONE</span>
+        <span>ADMIT ONE</span>
+        <span>ADMIT ONE</span>
+    </p>
+    <div class="right-info-container">
+      <div class="show-name">
+        <h1>{{eventTitle}}</h1>
+      </div>
+      <div class="barcode">
+        <img src="https://external-preview.redd.it/cg8k976AV52mDvDb5jDVJABPrSZ3tpi1aXhPjgcDTbw.png?auto=webp&s=1c205ba303c1fa0370b813ea83b9e1bddb7215eb" alt="QR code">
+      </div>
+
+      <br> 
+      <small style="font-size: 10px;">Seat Number: <span style="color: black; font-weight: bold;">{{seatNumber}}</span></small>
+      <!-- <p class="ticket-number">
+        {{seatNumber}}
+      </p> -->
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
