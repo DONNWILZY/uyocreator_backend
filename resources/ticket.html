@@ -137,6 +137,8 @@
     .show-name {
       font-size: 32px;
       color: #3a0958; /* Dark Purple */
+      text-align: right;
+      justify-self: right;
     }
 
     .show-name h1 {
@@ -175,7 +177,7 @@
     }
 
     .right {
-      width: 180px;
+      width: 220px;
       border-left: 1px dashed #404040;
       position: relative;
     }
@@ -190,9 +192,13 @@
       align-items: flex-end; /* Changed to flex-end */
     }
 
-    .right .show-name h1 {
-      font-size: 18px;
+    .right .show-name .titleLabel {
+      font-size: 14px;
       text-align: right; /* Added text-align: right */
+      font-weight: 700; 
+      /* font-style: bold;  */
+      color: #EF5E25;
+      /* font-size: smaller; */
     }
 
     .barcode {
@@ -248,7 +254,7 @@
     </div>
     <div class="ticket-info">
       <p class="date">
-        <span>Date: Coming Soon</span>
+        <span>date : Coming Soon</span>
         <!-- <span>TUESDAY</span>
         <span class="event-date">NOVEMBER 29TH</span>
         <span>2024</span> -->
@@ -279,7 +285,7 @@
     </p>
     <div class="right-info-container">
       <div class="show-name">
-        <h1>{{eventTitle}}</h1>
+        <h6 class="titleLabel" >{{title}}</h6>
       </div>
       <div class="barcode">
         <img src="https://external-preview.redd.it/cg8k976AV52mDvDb5jDVJABPrSZ3tpi1aXhPjgcDTbw.png?auto=webp&s=1c205ba303c1fa0370b813ea83b9e1bddb7215eb" alt="QR code">

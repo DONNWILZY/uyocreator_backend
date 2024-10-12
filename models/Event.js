@@ -2,7 +2,11 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const eventSchema = new Schema({
+    
     title: { type: String, required: true },
+    eventNumber: { type: String, unique: true },
+    image: { type: String },
+    waterMark: { type: String,},
     description: { type: String, required: true },
     startDate: { type: Date, required: true },
     endDate: { type: Date }, // Optional for multi-day events

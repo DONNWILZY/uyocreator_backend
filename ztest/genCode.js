@@ -6,7 +6,7 @@ const otp = generateCode.generateDigits(6);
 const appId = generateCode.generateMixed(10);
 const number = generateCode.generateDigits(10);
 const alpha = generateCode.generateMixed(10);
-const mix = generateCode.generateAlpha(10);
+const eventNumber = generateCode.generateAlpha(10);
 
 
 

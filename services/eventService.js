@@ -19,6 +19,7 @@ const eventService = {
   // Create a new event
   async createEvent(eventData) {
     try {
+      eventData.eventNumber = generateCode.generateAlpha(5).toUpperCase();
       const event = new Event(eventData);
       await event.save();
       return event;
@@ -92,7 +93,7 @@ async  bookAttendee(eventId, userId) {
       }
   
       // Step 4: Generate a ticket number
-      const ticketNumber = `TICKET-${generateCode.generateAlpha(8).toUpperCase()}`;
+      const ticketNumber = `${generateCode.generateAlpha(8).toUpperCase()}`;
   
       // Step 5: Get user's email and name
       const user = await User.findById(userId);
@@ -110,7 +111,8 @@ async  bookAttendee(eventId, userId) {
   
       // Step 8: Replace placeholders in the HTML template with actual values
       htmlTemplate = htmlTemplate
-        .replace('{{eventTitle}}', event.title)
+      .replace('{{date}}', event.startDate)  
+      .replace('{{title}}', event.title)
         .replace('{{ticketNumber}}', ticketNumber)
         .replace('{{seatNumber}}', seatNumber)
         .replace('{{attendeeName}}', name);
@@ -146,7 +148,15 @@ async  bookAttendee(eventId, userId) {
   
       console.log('Email sent successfully');
       
-      return event;
+      
+      // Return the event data along with the attendee's data
+    return {
+      event: {
+        ...event.toObject(),
+        attendees: event.attendees.find(attendee => attendee.userId.toString() === userId.toString())
+      }
+    };
+
     } catch (error) {
       console.error('Error booking attendee:', error);
       throw error;
