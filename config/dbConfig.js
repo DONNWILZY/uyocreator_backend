@@ -7,7 +7,7 @@ function connectToDatabase() {
     const uri = process.env.NODE_ENV === 'production' ? VIRTUAL_DB : LOCAL_DB;
 
     mongoose.connect(uri, {
-        useNewUrlParser: true,
+        // useNewUrlParser: true,
         // useUnifiedTopology: true,
         serverSelectionTimeoutMS: 10000, // 10-second connection timeout
     });
