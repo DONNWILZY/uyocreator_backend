@@ -110,6 +110,27 @@ const authControllers = {
     }
   },
 
+  // Get all users
+async getAllUsers(req, res) {
+  try {
+    const users = await authService.getAllUsers();
+    res.json(users);
+  } catch (error) {
+    // Handle error
+  }
+},
+
+// Get single user by ID
+async getUserById(req, res) {
+  try {
+    const userId = req.params.id;
+    const user = await authService.getUserById(userId);
+    res.json(user);
+  } catch (error) {
+    // Handle error
+  }
+},
+
   // Logout Controller
   async logout(req, res, next) {
     try {

@@ -12,7 +12,6 @@ const saltRounds = 10;
 
 const authService = {
   // Create User with OTP for verification
-// Create User with OTP for verification
 async createUser(name, email, gender, password) {
     try {
       const hashedPassword = await bcrypt.hash(password, saltRounds);
@@ -160,6 +159,27 @@ async createUser(name, email, gender, password) {
     await user.save();
 
     return { message: 'Password changed successfully.' };
+  },
+
+  // Get all users
+  async getAllUsers() {
+    try {
+      const users = await User.find().select('-password -__v');
+      return users;
+    } catch (error) {
+      throw new AppError(error.message, 500, 'GET_ALL_USERS_ERROR', error);
+    }
+  },
+
+  // Get single user by ID
+  async getUserById(userId) {
+    try {
+      const user = await User.findById(userId).select('-password -__v');
+      if (!user) throw new AppError('User not found', 404);
+      return user;
+    } catch (error) {
+      throw new AppError(error.message, 500, 'GET_USER_BY_ID_ERROR', error);
+    }
   },
 
   // Logout (Token handling can be implemented in the frontend)

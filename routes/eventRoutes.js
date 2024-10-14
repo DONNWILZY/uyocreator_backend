@@ -1,6 +1,8 @@
 const express = require('express');
 const eventController = require('../controllers/eventController');
 const router = express.Router();
+const cors = require('cors');
+router.use(cors());
 
 // Create event
 router.post('/create', eventController.createEvent);
