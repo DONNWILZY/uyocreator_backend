@@ -202,7 +202,14 @@ async  bookAttendee(eventId, userId) {
     });
     if (!event) throw new AppError('Event not found', 404);
     return event;
-  }
+  },
+
+  // Get event by event number
+async getEventByEventNumber(eventNumber) {
+  const event = await Event.findOne({ eventNumber }).populate('attendees.userId', 'name email');
+  if (!event) throw new AppError('Event not found', 404);
+  return event;
+}
 };
 
 module.exports = eventService;

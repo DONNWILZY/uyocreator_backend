@@ -62,19 +62,25 @@ const eventController = {
   },
 
   // Book attendee
-  async bookAttendee(req, res, next) {
-    const { eventId, userId } = req.body;
-    try {
+// Book attendee controller
+async  bookAttendee(req, res, next) {
+  const { eventId, userId } = req.body;
+  try {
       const event = await eventService.bookAttendee(eventId, userId);
       res.status(200).json({
-        status: 'success',
-        message: 'Attendee booked successfully',
-        data: event,
+          status: 'success',
+          message: 'Attendee booked successfully',
+          data: event,
       });
-    } catch (error) {
-      next(error);
-    }
-  },
+  } catch (error) {
+      // If it's an instance of AppError, return the error message and status code
+      if (error instanceof AppError) {
+          return res.status(error.statusCode).json({ message: error.message });
+      }
+      next(error);  // For other errors, pass to global error handler
+  }
+},
+
 
   // Get event by ID
   async getEventById(req, res, next) {
@@ -129,7 +135,21 @@ const eventController = {
     } catch (error) {
       next(error);
     }
+  },
+
+  // Get event by event number
+async getEventByEventNumber(req, res, next) {
+  const { eventNumber } = req.params;
+  try {
+    const event = await eventService.getEventByEventNumber(eventNumber);
+    res.status(200).json({
+      status: 'success',
+      data: event,
+    });
+  } catch (error) {
+    next(error);
   }
+}
 };
 
 module.exports = eventController;

@@ -5,13 +5,16 @@ const eventSchema = new Schema({
     
     title: { type: String, required: true },
     eventNumber: { type: String, unique: true },
+    theme: {type: String},
     image: { type: String },
     waterMark: { type: String,},
+    venue: { type: String,},
     description: { type: String, required: true },
     startDate: { type: Date, required: true },
     endDate: { type: Date }, // Optional for multi-day events
     isFree: { type: Boolean, default: true },
     price: { type: Number }, // For paid events
+    displayVolunteers: { type: Boolean, default: true },
     attendees: [
         {
             userId: { type: Schema.Types.ObjectId, ref: 'User', required: true },
@@ -36,8 +39,16 @@ const eventSchema = new Schema({
     ],
     organizers: [
         {
+            userId: { type: Schema.Types.ObjectId, ref: 'User', required: true },
+            role: { type: String }
+        }
+    ],
+    speakers: [
+        {
+            
+            photo: String,
             name: String,
-            role: String,
+            topic: String
         }
     ],
     sponsors: [
@@ -48,8 +59,8 @@ const eventSchema = new Schema({
     ],
     volunteers: [
         {
-            name: String,
-            department: String,
+            userId: { type: Schema.Types.ObjectId, ref: 'User'},
+            department: { type: String }
         }
     ],
     maxAttendees: { type: Number }, // Maximum number of attendees

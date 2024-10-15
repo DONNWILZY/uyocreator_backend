@@ -31,4 +31,8 @@ router.get('/user/:userId', eventController.getEventsByUser);
 // Get single event for a specific user
 router.get('/:eventId/user/:userId', eventController.getSingleEventByUser);
 
+// get event with event numnber
+router.get('/reserve/:eventNumber', eventController.getEventByEventNumber);
+
+
 module.exports = router;
