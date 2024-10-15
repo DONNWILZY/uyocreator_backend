@@ -15,6 +15,9 @@ const eventSchema = new Schema({
     isFree: { type: Boolean, default: true },
     price: { type: Number }, // For paid events
     displayVolunteers: { type: Boolean, default: true },
+    displaySpeakers: { type: Boolean, default: true },
+    displayOrganizers: { type: Boolean, default: true },
+    displayAgenda: { type: Boolean, default: true },
     attendees: [
         {
             userId: { type: Schema.Types.ObjectId, ref: 'User', required: true },
@@ -32,7 +35,6 @@ const eventSchema = new Schema({
                     time: String, // e.g. "10:40 - 11:00"
                     title: String,
                     duration: String, // e.g. "20 mins"
-                    speaker: { type: Schema.Types.ObjectId, ref: 'User' }, // Optional if speakers are enabled
                 }
             ]
         }
