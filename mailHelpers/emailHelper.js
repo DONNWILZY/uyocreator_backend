@@ -27,7 +27,7 @@ const sendEmail = async (email, subject, templateName, variables, attachments = 
 
     // Define mail options, including sender's name and any attachments
     const mailOptions = {
-      from: `${process.env.senderName} <${process.env.AUTH_EMAIL}>`,  // Sender's name from environment variables
+      from: `${process.env.senderName}>`,  // Sender's name from environment variables
       to: email,
       subject: subject,
       html: emailTemplate,
