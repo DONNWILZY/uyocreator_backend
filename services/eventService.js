@@ -179,7 +179,7 @@ async  bookAttendee(eventId, userId) {
 
   // Get event by ID
   async getEventById(eventId) {
-    const event = await Event.findById(eventId).populate('attendees.userId', 'name email');
+    const event = await Event.findById(eventId).populate('attendees.userId', 'name avatar');
     if (!event) throw new AppError('Event not found', 404);
     return event;
   },
