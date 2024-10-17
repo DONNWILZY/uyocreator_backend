@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js",
-    "build": "index.js"
+    "build": "index.js",
+    "install": "puppeteer install"
   },
   "repository": {
     "type": "git",

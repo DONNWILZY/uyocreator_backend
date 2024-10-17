@@ -1,3 +1,5 @@
+//services\eventService.js
+
 // Import required modules
 const fs = require('fs'); // File system module
 const path = require('path');
@@ -104,27 +106,27 @@ async  bookAttendee(eventId, userId) {
       event.attendees.push({ userId, status: 'booked', ticketNumber, seatNumber });
       await event.save();
   
-      console.log('Event saved:', event);
+      // console.log('Event saved:', event);
   
-      // Step 7: Read HTML template
-      let htmlTemplate = fs.readFileSync(path.join(__dirname, '../resources/ticket.html'), 'utf-8');
+      // // Step 7: Read HTML template
+      // let htmlTemplate = fs.readFileSync(path.join(__dirname, '../resources/ticket.html'), 'utf-8');
   
-      // Step 8: Replace placeholders in the HTML template with actual values
-      htmlTemplate = htmlTemplate
-      .replace('{{date}}', event.startDate)  
-      .replace('{{title}}', event.title)
-        .replace('{{ticketNumber}}', ticketNumber)
-        .replace('{{seatNumber}}', seatNumber)
-        .replace('{{attendeeName}}', name);
+      // // Step 8: Replace placeholders in the HTML template with actual values
+      // htmlTemplate = htmlTemplate
+      // .replace('{{date}}', event.startDate)  
+      // .replace('{{title}}', event.title)
+      //   .replace('{{ticketNumber}}', ticketNumber)
+      //   .replace('{{seatNumber}}', seatNumber)
+      //   .replace('{{attendeeName}}', name);
   
-      // Step 9: Convert the filled HTML to a PDF using Puppeteer
-      const pdfBuffer = await generatePdfFromHtml(htmlTemplate);
+      // // Step 9: Convert the filled HTML to a PDF using Puppeteer
+      // const pdfBuffer = await generatePdfFromHtml(htmlTemplate);
   
       // Step 10: Prepare email data and attachments
       const emailData = {
         email,
         subject: 'Ticket Confirmation',
-        templateName: 'eventTicket',
+        templateName: 'ticket',
         variables: {
           name,
           eventTitle: event.title,
@@ -133,18 +135,18 @@ async  bookAttendee(eventId, userId) {
         }
       };
   
-      const attachments = [
-        {
-          filename: 'Uyo Creators Week.pdf',
-          content: pdfBuffer,
-          contentType: 'application/pdf'
-        }
-      ];
+      // const attachments = [
+      //   {
+      //     filename: 'Uyo Creators Week.pdf',
+      //     content: pdfBuffer,
+      //     contentType: 'application/pdf'
+      //   }
+      // ];
   
       console.log('Email data:', emailData); // Log email data for debugging
   
       // Step 11: Send email with PDF attachment
-      await sendEmail(emailData.email, emailData.subject, emailData.templateName, emailData.variables, attachments);
+      await sendEmail(emailData.email, emailData.subject, emailData.templateName, emailData.variables, ); //attachments
   
       console.log('Email sent successfully');
       
@@ -161,8 +163,7 @@ async  bookAttendee(eventId, userId) {
       console.error('Error booking attendee:', error);
       throw error;
     }
-  }
-  ,
+  },
   
 
 

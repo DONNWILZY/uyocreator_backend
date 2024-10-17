@@ -1,10 +1,19 @@
+//services\pdfService.js
+
 const puppeteer = require('puppeteer');
 
 // Function to generate a PDF from HTML using Puppeteer
 async function generatePdfFromHtml(htmlContent) {
-  const browser = await puppeteer.launch();
-  const page = await browser.newPage();
+  const browser = await puppeteer.launch({
+    headless: true, // Run in headless mode (required on Vercel)
+    args: [
+      '--no-sandbox',         // Vercel requires these flags to run Puppeteer
+      '--disable-setuid-sandbox'
+    ],
+  });
 
+  const page = await browser.newPage();
+  
   // Set the content of the page to the provided HTML
   await page.setContent(htmlContent, { waitUntil: 'networkidle0' });
 
@@ -20,3 +29,4 @@ async function generatePdfFromHtml(htmlContent) {
 }
 
 module.exports = { generatePdfFromHtml };
+
