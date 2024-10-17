@@ -186,7 +186,7 @@ async  bookAttendee(eventId, userId) {
 
   // Get all events
   async getAllEvents() {
-    return await Event.find().populate('attendees.userId', 'name email');
+    return await Event.find().populate('attendees.userId', 'name avatar');
   },
 
   // Get events for a specific user
