@@ -1,10 +1,17 @@
-frontend:
-    path: ./
-    publish: ""
-    scripts:
-        build: npm run build
-        deploy: npm install
-    subdomain: uyocreatorclub
+backend:
+  path: ./
+  language:
+    name: js
+    packageManager: npm
+  functions:
+    - name: uyocreatorclub-function
+      path: ./
+      handler: index
+      entry: index.js
+  scripts:
+    build: npm run build
+    deploy: npm install
+  subdomain: uyocreatorclub
 name: uyocreatorclub
 region: us-east-1
 yamlVersion: 2
