@@ -18,6 +18,8 @@ const eventSchema = new Schema({
     displaySpeakers: { type: Boolean, default: true },
     displayOrganizers: { type: Boolean, default: true },
     displayAgenda: { type: Boolean, default: true },
+    displaySponsors: { type: Boolean, default: true },
+    displayAttendees: { type: Boolean, default: true },
     attendees: [
         {
             userId: { type: Schema.Types.ObjectId, ref: 'User', required: true },
